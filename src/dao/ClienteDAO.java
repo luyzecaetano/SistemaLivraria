@@ -1,7 +1,7 @@
 package dao;
 
-import java.util.List;
 import modelo.Cliente;
+import java.util.List;
 import java.sql.SQLException;
 
 public interface ClienteDAO {
