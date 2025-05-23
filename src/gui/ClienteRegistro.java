@@ -264,8 +264,8 @@ public class ClienteRegistro extends javax.swing.JFrame {
 
             //validacao
             if ((fieldNome.getText().isEmpty()) || (fieldEndereco.getText().isEmpty())
-                    || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty())
-                    || (comboTipo.getSelectedIndex() == 0)) {
+             || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty())
+             || (comboTipo.getSelectedIndex() == 0) || (comboTipo.getSelectedItem() == null)) {
                 JOptionPane.showMessageDialog(null, "os campos não podem ser vazios");
                 return;
             }
@@ -277,11 +277,9 @@ public class ClienteRegistro extends javax.swing.JFrame {
                 cliente.setIdcliente(clienteEditando.getIdcliente());
                 dao.atualizar(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
-                clienteView.LoadClientes();
             } else {
                 dao.inserir(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
-                clienteView.LoadClientes();
             }
 
             this.dispose();

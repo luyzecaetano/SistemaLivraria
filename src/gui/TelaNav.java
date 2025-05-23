@@ -47,6 +47,11 @@ public class TelaNav extends javax.swing.JFrame {
         verEditoras.setText("Editoras");
 
         verLivros.setText("Livros");
+        verLivros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verLivrosActionPerformed(evt);
+            }
+        });
 
         verPedidos.setText("Pedidos");
 
@@ -94,6 +99,11 @@ public class TelaNav extends javax.swing.JFrame {
         ClienteView clienteView = new ClienteView();
         clienteView.setVisible(true);
     }//GEN-LAST:event_verClientesActionPerformed
+
+    private void verLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLivrosActionPerformed
+        LivroView livrosView = new LivroView();
+        livrosView.setVisible(true);
+    }//GEN-LAST:event_verLivrosActionPerformed
 
     /**
      * @param args the command line arguments
