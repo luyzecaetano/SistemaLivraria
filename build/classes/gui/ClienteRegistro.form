@@ -68,7 +68,6 @@
                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="fieldNome" alignment="0" min="-2" pref="286" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="comboTipo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
@@ -87,6 +86,11 @@
                       </Group>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="fieldNome" min="-2" pref="286" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

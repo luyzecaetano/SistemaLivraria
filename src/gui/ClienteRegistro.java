@@ -14,14 +14,36 @@ import modelo.Cliente;
  */
 public class ClienteRegistro extends javax.swing.JFrame {
     
-    private ClienteView clienteView;
+    private ClienteView clienteView = new ClienteView();
 
-    /**
-     * Creates new form ClienteRegistro
-     */
+    private boolean editMode = false;
+    private Cliente clienteEditando = null;
+
+    // padrão: cadastrar
     public ClienteRegistro(ClienteView clienteView) {
         initComponents();
-        this.clienteView = clienteView;
+        editMode = false;
+    }
+
+    // ediçao
+    public ClienteRegistro(Cliente cliente, ClienteView clienteView) {
+        initComponents();
+        editMode = true;
+        clienteEditando = cliente;
+
+        fieldNome.setText(cliente.getNome());
+        fieldEndereco.setText(cliente.getEndereco());
+        fieldTelefone.setText(cliente.getTelefone());
+
+        if (cliente.getTipo_cliente().equalsIgnoreCase("PF")) {
+            comboTipo.setSelectedItem("CPF");
+            aplicarMascara("###.###.###-##");
+        } else {
+            comboTipo.setSelectedItem("CNPJ");
+            aplicarMascara("##.###.###/####-##");
+        }
+
+        fieldCad.setText(cliente.getCpf_cnpj());
     }
 
     /**
@@ -113,7 +135,6 @@ public class ClienteRegistro extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
-                    .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
@@ -127,6 +148,10 @@ public class ClienteRegistro extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(fieldCad, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,38 +246,46 @@ public class ClienteRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-            Cliente clientes = new Cliente();
-            clientes.setNome(fieldNome.getText());
-            clientes.setEndereco(fieldEndereco.getText());
-            clientes.setTelefone(fieldTelefone.getText());
-            clientes.setCpf_cnpj(fieldCad.getText());
+            Cliente cliente = new Cliente();
+            cliente.setNome(fieldNome.getText());
+            cliente.setEndereco(fieldEndereco.getText());
+            cliente.setTelefone(fieldTelefone.getText());
+            cliente.setCpf_cnpj(fieldCad.getText());
 
             String tipoSel = (String) comboTipo.getSelectedItem();
             if ("CPF".equals(tipoSel)) {
-                clientes.setTipo_cliente("PF");
+                cliente.setTipo_cliente("PF");
             } else if ("CNPJ".equals(tipoSel)) {
-                clientes.setTipo_cliente("PJ");
+                cliente.setTipo_cliente("PJ");
             } else {
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar tipo de cliente");
+                JOptionPane.showMessageDialog(null, "Selecione um tipo válido (CPF ou CNPJ)");
+                return;
             }
-            
+
             //validacao
             if ((fieldNome.getText().isEmpty()) || (fieldEndereco.getText().isEmpty())
-                || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty()) 
-                || (comboTipo.getSelectedIndex() == 0)) {
+                    || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty())
+                    || (comboTipo.getSelectedIndex() == 0)) {
                 JOptionPane.showMessageDialog(null, "os campos não podem ser vazios");
-            } else {
-                //instanciando a classe usrdao do package e criando seu obj
-                ClienteDAOImp dao = new ClienteDAOImp();
-
-                dao.inserir(clientes);
-                JOptionPane.showMessageDialog(null, "Cliente " + fieldNome.getText() + " registrado com sucesso");
-                if (clienteView != null) {
-                    clienteView.LoadClientes();
-                }
-                
-                this.dispose();
+                return;
             }
+            
+            //instanciando a classe usrdao do package e criando seu obj
+            ClienteDAOImp dao = new ClienteDAOImp();
+            
+            if (editMode) {
+                cliente.setIdcliente(clienteEditando.getIdcliente());
+                dao.atualizar(cliente);
+                JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
+                clienteView.LoadClientes();
+            } else {
+                dao.inserir(cliente);
+                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
+                clienteView.LoadClientes();
+            }
+
+            this.dispose();
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar cliente: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
