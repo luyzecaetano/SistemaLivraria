@@ -31,6 +31,12 @@ public class TelaNav extends javax.swing.JFrame {
         verEditoras = new javax.swing.JButton();
         verLivros = new javax.swing.JButton();
         verPedidos = new javax.swing.JButton();
+        cadClientes = new javax.swing.JButton();
+        cadEditoras = new javax.swing.JButton();
+        cadLivros = new javax.swing.JButton();
+        cadPedidos = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -50,40 +56,76 @@ public class TelaNav extends javax.swing.JFrame {
 
         verPedidos.setText("Pedidos");
 
+        cadClientes.setText("Clientes");
+        cadClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadClientesActionPerformed(evt);
+            }
+        });
+
+        cadEditoras.setText("Editoras");
+
+        cadLivros.setText("Livros");
+
+        cadPedidos.setText("Pedidos");
+
+        jLabel2.setText("cadastro rápido");
+
+        jLabel3.setText("visualizacoes");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(verClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(verLivros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(verEditoras)
-                            .addComponent(verPedidos)))
+                        .addComponent(cadClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cadEditoras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cadLivros)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cadPedidos))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(jLabel1)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addComponent(verClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(verEditoras)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(verLivros)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(verPedidos))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(174, 174, 174))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(verClientes)
-                    .addComponent(verEditoras))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(verEditoras)
                     .addComponent(verLivros)
                     .addComponent(verPedidos))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cadClientes)
+                    .addComponent(cadEditoras)
+                    .addComponent(cadLivros)
+                    .addComponent(cadPedidos))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,6 +136,11 @@ public class TelaNav extends javax.swing.JFrame {
         ClienteView clienteView = new ClienteView();
         clienteView.setVisible(true);
     }//GEN-LAST:event_verClientesActionPerformed
+
+    private void cadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadClientesActionPerformed
+        ClienteRegistro clienteRegistro = new ClienteRegistro(null);
+        clienteRegistro.setVisible(true);
+    }//GEN-LAST:event_cadClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,7 +179,13 @@ public class TelaNav extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cadClientes;
+    private javax.swing.JButton cadEditoras;
+    private javax.swing.JButton cadLivros;
+    private javax.swing.JButton cadPedidos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton verClientes;
     private javax.swing.JButton verEditoras;
     private javax.swing.JButton verLivros;

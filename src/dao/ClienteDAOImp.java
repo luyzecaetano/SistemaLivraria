@@ -77,7 +77,7 @@ public class ClienteDAOImp implements ClienteDAO {
                 cliente.setNome(rs.getString("nome"));
                 cliente.setEndereco(rs.getString("endereco"));
                 cliente.setTelefone(rs.getString("telefone"));
-                cliente.setCpf_cnpj(rs.getString("cpf_cnj"));
+                cliente.setCpf_cnpj(rs.getString("cpf_cnpj"));
                 cliente.setTipo_cliente(rs.getString("endereco"));
                 
             } else {

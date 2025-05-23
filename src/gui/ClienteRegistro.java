@@ -14,36 +14,14 @@ import modelo.Cliente;
  */
 public class ClienteRegistro extends javax.swing.JFrame {
     
-    private ClienteView clienteView = new ClienteView();
+    private ClienteView clienteView;
 
-    private boolean editMode = false;
-    private Cliente clienteEditando = null;
-
-    // padrão: cadastrar
+    /**
+     * Creates new form ClienteRegistro
+     */
     public ClienteRegistro(ClienteView clienteView) {
         initComponents();
-        editMode = false;
-    }
-
-    // ediçao
-    public ClienteRegistro(Cliente cliente, ClienteView clienteView) {
-        initComponents();
-        editMode = true;
-        clienteEditando = cliente;
-
-        fieldNome.setText(cliente.getNome());
-        fieldEndereco.setText(cliente.getEndereco());
-        fieldTelefone.setText(cliente.getTelefone());
-
-        if (cliente.getTipo_cliente().equalsIgnoreCase("PF")) {
-            comboTipo.setSelectedItem("CPF");
-            aplicarMascara("###.###.###-##");
-        } else {
-            comboTipo.setSelectedItem("CNPJ");
-            aplicarMascara("##.###.###/####-##");
-        }
-
-        fieldCad.setText(cliente.getCpf_cnpj());
+        this.clienteView = clienteView;
     }
 
     /**
@@ -243,48 +221,38 @@ public class ClienteRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-            Cliente cliente = new Cliente();
-            cliente.setNome(fieldNome.getText());
-            cliente.setEndereco(fieldEndereco.getText());
-            cliente.setTelefone(fieldTelefone.getText());
-            cliente.setCpf_cnpj(fieldCad.getText());
+            Cliente clientes = new Cliente();
+            clientes.setNome(fieldNome.getText());
+            clientes.setEndereco(fieldEndereco.getText());
+            clientes.setTelefone(fieldTelefone.getText());
+            clientes.setCpf_cnpj(fieldCad.getText());
 
             String tipoSel = (String) comboTipo.getSelectedItem();
             if ("CPF".equals(tipoSel)) {
-                cliente.setTipo_cliente("PF");
+                clientes.setTipo_cliente("PF");
             } else if ("CNPJ".equals(tipoSel)) {
-                cliente.setTipo_cliente("PJ");
+                clientes.setTipo_cliente("PJ");
             } else {
-                JOptionPane.showMessageDialog(null, "Selecione um tipo válido (CPF ou CNPJ)");
-                return;
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar tipo de cliente");
             }
-
+            
             //validacao
             if ((fieldNome.getText().isEmpty()) || (fieldEndereco.getText().isEmpty())
-                    || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty())
-                    || (comboTipo.getSelectedIndex() == 0)) {
+                || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty()) 
+                || (comboTipo.getSelectedIndex() == 0)) {
                 JOptionPane.showMessageDialog(null, "os campos não podem ser vazios");
-                return;
-            }
-            
-            //instanciando a classe usrdao do package e criando seu obj
-            ClienteDAOImp dao = new ClienteDAOImp();
-            
-            if (editMode) {
-                cliente.setIdcliente(clienteEditando.getIdcliente());
-                dao.atualizar(cliente);
-                JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
             } else {
-                dao.inserir(cliente);
-                JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
+                //instanciando a classe usrdao do package e criando seu obj
+                ClienteDAOImp dao = new ClienteDAOImp();
+
+                dao.inserir(clientes);
+                JOptionPane.showMessageDialog(null, "Cliente " + fieldNome.getText() + " registrado com sucesso");
+                if (clienteView != null) {
+                    clienteView.LoadClientes();
+                }
+                
+                this.dispose();
             }
-
-            if (clienteView != null) {
-                clienteView.LoadClientes();
-            }
-
-            this.dispose();
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar cliente: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
