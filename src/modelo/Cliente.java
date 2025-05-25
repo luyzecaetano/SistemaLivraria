@@ -1,12 +1,12 @@
 package modelo;
 
 public class Cliente {
-    long idcliente;
-    String nome;
-    String endereco;
-    String telefone;
-    String cpf_cnpj;
-    String tipo_cliente; 
+    private long idcliente;
+    private String nome;
+    private String endereco;
+    private String telefone;
+    private String cpf_cnpj;
+    private String tipo_cliente; 
 
     public long getIdcliente() {
         return idcliente;

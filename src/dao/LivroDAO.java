@@ -1,16 +1,15 @@
 package dao;
 
 import java.util.List;
-import java.sql.SQLException;
 import modelo.Livro;
 
 public interface LivroDAO {
 
-    public void inserir(Livro livro) throws SQLException;
+    public void inserir(Livro livro);
 
-    public void atualizar(Livro livro) throws SQLException;
+    public void atualizar(Livro livro);
 
-    public void remover(Livro livro) throws SQLException;
+    public void remover(Livro livro);
 
     public Livro buscaId(long id);
 

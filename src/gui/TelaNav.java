@@ -35,6 +35,7 @@ public class TelaNav extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Sistema");
 
         verClientes.setText("Clientes");
@@ -45,6 +46,11 @@ public class TelaNav extends javax.swing.JFrame {
         });
 
         verEditoras.setText("Editoras");
+        verEditoras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verEditorasActionPerformed(evt);
+            }
+        });
 
         verLivros.setText("Livros");
         verLivros.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +60,11 @@ public class TelaNav extends javax.swing.JFrame {
         });
 
         verPedidos.setText("Pedidos");
+        verPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verPedidosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,16 +82,16 @@ public class TelaNav extends javax.swing.JFrame {
                             .addComponent(verEditoras)
                             .addComponent(verPedidos)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
+                        .addGap(98, 98, 98)
                         .addComponent(jLabel1)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(verClientes)
                     .addComponent(verEditoras))
@@ -88,7 +99,7 @@ public class TelaNav extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(verLivros)
                     .addComponent(verPedidos))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -104,6 +115,15 @@ public class TelaNav extends javax.swing.JFrame {
         LivroView livrosView = new LivroView();
         livrosView.setVisible(true);
     }//GEN-LAST:event_verLivrosActionPerformed
+
+    private void verEditorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEditorasActionPerformed
+        
+    }//GEN-LAST:event_verEditorasActionPerformed
+
+    private void verPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPedidosActionPerformed
+        CompraView compraView = new CompraView();
+        compraView.setVisible(true);
+    }//GEN-LAST:event_verPedidosActionPerformed
 
     /**
      * @param args the command line arguments

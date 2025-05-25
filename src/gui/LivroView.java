@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
 import dao.LivroDAOImp;
@@ -10,15 +6,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Livro;
 
-/**
- *
- * @author luyze.marques
- */
 public class LivroView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LivrosView
-     */
     public LivroView() {
         initComponents();
         
@@ -58,11 +47,11 @@ public class LivroView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Título", "Editora", "ISBN"
+                "ID", "Título", "Editora", "ISBN", "Autor", "Assunto", "Quantidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -78,6 +67,7 @@ public class LivroView extends javax.swing.JFrame {
             tabelaLivros.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Livros Cadastrados");
 
         jLabel9.setText("Buscar por ID:");
@@ -122,6 +112,8 @@ public class LivroView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,9 +125,8 @@ public class LivroView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAtualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnExcluir))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                                .addComponent(btnExcluir)
+                                .addGap(15, 15, 15)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -145,7 +136,7 @@ public class LivroView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnAtualizar)
@@ -155,7 +146,7 @@ public class LivroView extends javax.swing.JFrame {
                     .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(35, 35, 35))
         );
 
         pack();
@@ -171,7 +162,7 @@ public class LivroView extends javax.swing.JFrame {
             DFT.setRowCount(0);
 
             for (Livro livro : livros) {                
-                DFT.addRow(new Object[]{livro.getId_livro(),livro.getTitulo(),livro.getId_editora(),livro.getIsbn()});
+                DFT.addRow(new Object[]{livro.getId_livro(),livro.getTitulo(),livro.getNomeEditora(),livro.getIsbn(),livro.getNome_autor(),livro.getAssunto(),livro.getQtde()});
             }
 
         } catch (Exception ex) {
@@ -183,7 +174,8 @@ public class LivroView extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String id = fieldIDLivro.getText();
 
-        if (id == null) {
+        if (id.isEmpty()) {
+            LoadLivros();
             return;
         }
 
@@ -194,14 +186,14 @@ public class LivroView extends javax.swing.JFrame {
             DefaultTableModel DFT = (DefaultTableModel) tabelaLivros.getModel();
             DFT.setRowCount(0);
 
-            DFT.addRow(new Object[]{livro.getId_livro(),livro.getTitulo(),livro.getId_editora(),livro.getIsbn()});
+            DFT.addRow(new Object[]{livro.getId_livro(),livro.getTitulo(),livro.getNomeEditora(),livro.getIsbn(),livro.getNome_autor(),livro.getAssunto(),livro.getQtde()});
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar livro \n", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        LivroRegistro tela = new LivroRegistro(this);
+        LivroRegistro tela = new LivroRegistro();
         tela.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

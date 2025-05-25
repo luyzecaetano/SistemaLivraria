@@ -2,15 +2,14 @@ package dao;
 
 import modelo.Cliente;
 import java.util.List;
-import java.sql.SQLException;
 
 public interface ClienteDAO {
 
-    public void inserir(Cliente cliente) throws SQLException;
+    public void inserir(Cliente cliente);
 
-    public void atualizar(Cliente cliente) throws SQLException;
+    public void atualizar(Cliente cliente);
 
-    public void remover(Cliente cliente) throws SQLException;
+    public void remover(Cliente cliente);
 
     public Cliente buscaId(long id);
 

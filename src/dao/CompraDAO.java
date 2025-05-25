@@ -2,17 +2,20 @@ package dao;
 
 import modelo.Compra;
 import java.util.List;
-import java.sql.SQLException;
 
 public interface CompraDAO {
 
-    public void inserir(Compra compra) throws SQLException;
+    public void inserir(Compra compra);
 
-    public void atualizar(Compra compra) throws SQLException;
+    public void atualizar(List<Compra> compras);
 
-    public void remover(Compra compra) throws SQLException;
+    public void remover(int codPedido);
 
-    public Compra buscaId(long id);
+    public List<Compra> buscaCod(int codPedido);
 
     public List<Compra> listar();
+    
+    public int buscarUltimoCod();
+    
+    public List<Compra> listarPorCliente(Long idCliente);
 }

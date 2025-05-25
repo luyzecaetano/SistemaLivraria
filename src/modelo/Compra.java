@@ -2,11 +2,29 @@ package modelo;
 
 public class Compra {
 
-    long id_compra;
-    long id_cliente;
-    long id_livro;
-    String data_compra;
-    int qtde;
+    private long id_compra;
+    private long id_cliente;
+    private long id_livro;
+    private String data_compra;
+    private int cod_pedido;
+    private String nomeCliente = "";
+    private String tituloLivro = "";
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public String getTituloLivro() {
+        return tituloLivro;
+    }
+
+    public void setTituloLivro(String tituloLivro) {
+        this.tituloLivro = tituloLivro;
+    }
 
     public long getId_compra() {
         return id_compra;
@@ -40,12 +58,12 @@ public class Compra {
         this.data_compra = data_compra;
     }
 
-    public int getQtde() {
-        return qtde;
+    public int getCod_pedido() {
+        return cod_pedido;
     }
 
-    public void setQtde(int qtde) {
-        this.qtde = qtde;
+    public void setCod_pedido(int cod_pedido) {
+        this.cod_pedido = cod_pedido;
     }
-    
+
 }

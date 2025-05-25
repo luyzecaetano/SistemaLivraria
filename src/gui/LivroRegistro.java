@@ -1,21 +1,24 @@
 package gui;
 
+import dao.EditoraDAOImp;
 import dao.LivroDAOImp;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import modelo.Editora;
 import modelo.Livro;
 
 public class LivroRegistro extends javax.swing.JFrame {
 
-    private LivroView livroView = new LivroView();
-
     private boolean editMode = false;
     private Livro livroEditando = null;
+    private Map<Long, String> mapEditora = new HashMap<>();
 
     // padrão: cadastrar
-    public LivroRegistro(LivroView livroView) {
+    public LivroRegistro() {
         initComponents();
         LoadEditoras();
-        editMode = false;
     }
 
     // ediçao
@@ -28,14 +31,14 @@ public class LivroRegistro extends javax.swing.JFrame {
 
         fieldTitulo.setText(livro.getTitulo());
         fieldIsbn.setText(livro.getIsbn());
+        fieldAutor.setText(livro.getNome_autor());
+        fieldAssunto.setText(livro.getAssunto());
+        fieldQtde.setText(String.valueOf(livro.getQtde()));
 
         // seleciona a editora
-        for (int i = 0; i < cbEditora.getItemCount(); i++) {
-            Editora editora = cbEditora.getItemAt(i);
-            if (editora.getIdEditora() == livro.getIdEditora()) {
-                cbEditora.setSelectedIndex(i);
-                break;
-            }
+        String nomeEditora = mapEditora.get(livro.getId_editora());
+        if (nomeEditora != null) {
+            cbEditora.setSelectedItem(nomeEditora);
         }
     }
 
@@ -51,13 +54,19 @@ public class LivroRegistro extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        fieldIsbn = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         fieldTitulo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        cbEditora = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fieldQtde = new javax.swing.JFormattedTextField();
+        fieldAssunto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cbEditora = new javax.swing.JComboBox<>();
+        fieldAutor = new javax.swing.JTextField();
+        fieldIsbn = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -80,61 +89,96 @@ public class LivroRegistro extends javax.swing.JFrame {
             }
         });
 
+        fieldTitulo.setMinimumSize(new java.awt.Dimension(286, 25));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Registrar Livro");
 
-        cbEditora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
-
         jLabel9.setText("Editora:");
+
+        jLabel4.setText("Autor:");
+
+        jLabel5.setText("Quantidade:");
+
+        fieldQtde.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        fieldQtde.setMinimumSize(new java.awt.Dimension(286, 25));
+
+        fieldAssunto.setMinimumSize(new java.awt.Dimension(286, 25));
+
+        jLabel6.setText("Assunto:");
+
+        cbEditora.setMinimumSize(new java.awt.Dimension(286, 25));
+
+        fieldAutor.setMinimumSize(new java.awt.Dimension(286, 25));
+
+        fieldIsbn.setMinimumSize(new java.awt.Dimension(286, 25));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(fieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegistrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLimpar)
-                .addGap(31, 31, 31))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnRegistrar)
+                .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(fieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6)
+                            .addComponent(fieldAssunto, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldAssunto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldIsbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldQtde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegistrar)
-                    .addComponent(btnLimpar))
+                    .addComponent(btnLimpar)
+                    .addComponent(btnRegistrar))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -142,17 +186,17 @@ public class LivroRegistro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(21, 21, 21)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,31 +204,56 @@ public class LivroRegistro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoadEditoras() {
+        cbEditora.removeAllItems();
+        mapEditora.clear();
+
+        cbEditora.addItem("Selecione");
+
         EditoraDAOImp dao = new EditoraDAOImp();
         List<Editora> editoras = dao.listar();
+
         for (Editora e : editoras) {
-            cbEditora.addItem(e);
+            mapEditora.put(e.getId_editora(), e.getNome());
+            cbEditora.addItem(e.getNome());
         }
     }
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
-            Editora editoraSelecionada = (Editora) cbEditora.getSelectedItem();
-
-            Livro livro = new Livro();
-            livro.setIdeditora(editoraSelecionada.getIdeditora());
-            livro.setTitulo(fieldTitulo.getText());
-            livro.setIsbn(fieldIsbn.getText());
-
+            String editoraSel = (String) cbEditora.getSelectedItem();
+            
+            long idEditora = -1;
+            for (Map.Entry<Long, String> entry : mapEditora.entrySet()) {
+                if (entry.getValue().equals(editoraSel)) {
+                    idEditora = entry.getKey();
+                    break;
+                }
+            }
+            if (idEditora == -1) {
+                JOptionPane.showMessageDialog(null, "Erro ao identificar a editora.");
+                return;
+            }
+            
             //validacao
+            if (editoraSel == null || cbEditora.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Selecione uma editora válida");
+                return;
+            }
             if ((fieldTitulo.getText().isEmpty()) || (fieldIsbn.getText().isEmpty())
-                    || (cbEditora.getSelectedIndex() == 0) || (cbEditora.getSelectedItem() == null)) {
+                    || (fieldAutor.getText().isEmpty()) || (fieldAssunto.getText().isEmpty()) || (fieldQtde.getText().isEmpty())) {
                 JOptionPane.showMessageDialog(null, "os campos não podem ser vazios");
                 return;
             }
 
-            LivroDAOImp dao = new LivroDAOImp();
+            Livro livro = new Livro();
+            livro.setTitulo(fieldTitulo.getText());
+            livro.setIsbn(fieldIsbn.getText());
+            livro.setNome_autor(fieldAutor.getText());
+            livro.setAssunto(fieldAssunto.getText());
+            livro.setQtde(Integer.parseInt(fieldQtde.getText()));
+            livro.setId_editora(idEditora);
 
+            LivroDAOImp dao = new LivroDAOImp();
             if (editMode) {
                 livro.setId_livro(livroEditando.getId_livro());
                 dao.atualizar(livro);
@@ -193,7 +262,6 @@ public class LivroRegistro extends javax.swing.JFrame {
                 dao.inserir(livro);
                 JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso");
             }
-
             this.dispose();
 
         } catch (Exception ex) {
@@ -205,6 +273,9 @@ public class LivroRegistro extends javax.swing.JFrame {
         fieldTitulo.setText("");
         fieldIsbn.setText("");
         cbEditora.setSelectedItem("Selecione");
+        fieldAutor.setText("");
+        fieldAssunto.setText("");
+        fieldQtde.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
@@ -217,11 +288,17 @@ public class LivroRegistro extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbEditora;
+    private javax.swing.JTextField fieldAssunto;
+    private javax.swing.JTextField fieldAutor;
     private javax.swing.JTextField fieldIsbn;
+    private javax.swing.JFormattedTextField fieldQtde;
     private javax.swing.JTextField fieldTitulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
