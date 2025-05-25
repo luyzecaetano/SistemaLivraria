@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
 import dao.ClienteDAOImp;
+import dao.CompraDAOImp;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
+import modelo.Compra;
 
-/**
- *
- * @author luyze.marques
- */
 public class ClienteView extends javax.swing.JFrame {
 
     /**
@@ -70,6 +64,7 @@ public class ClienteView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Dados do cliente");
 
         labelNome.setText("    ");
@@ -82,6 +77,7 @@ public class ClienteView extends javax.swing.JFrame {
 
         labelCad.setText("    ");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Pedidos:");
 
         tabelaPedidos.setModel(new javax.swing.table.DefaultTableModel(
@@ -140,6 +136,7 @@ public class ClienteView extends javax.swing.JFrame {
             tabelaClientes.getColumnModel().getColumn(5).setResizable(false);
         }
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Clientes");
 
         btnCadastrar.setText("cadastrar");
@@ -170,16 +167,21 @@ public class ClienteView extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Nome:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("ID:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Telefone:");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Endereço:");
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+        jlabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlabel1.setText("Cadastro:");
 
         jLabel9.setText("Buscar por ID:");
@@ -191,19 +193,16 @@ public class ClienteView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelCad, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5)
-                            .addComponent(labelEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(343, 343, 343)
                                 .addComponent(jLabel6))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -215,15 +214,23 @@ public class ClienteView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelTelefone)))))
+                                    .addComponent(labelTelefone)))
+                            .addComponent(labelEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(190, 190, 190)
-                        .addComponent(jLabel1)))
-                .addGap(32, 32, 32)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel7)))))
+                .addGap(56, 56, 56)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addGap(234, 234, 234)
                         .addComponent(jLabel9)
@@ -238,9 +245,10 @@ public class ClienteView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnExcluir)
                         .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,25 +326,25 @@ public class ClienteView extends javax.swing.JFrame {
         }
     }
 
-//    public void LoadPedidos() {
-//        try {
-//            PedidosDAOImp dao = new PedidosDAOImp();
-//            List<Pedido> pedidos = dao.listar();
-//            
-//            DefaultTableModel DFT = (DefaultTableModel) tabelaClientes.getModel();
-//            DFT.setRowCount(0);
-//
-//            for (Pedido p : pedidos) {
-//                DFT.addRow(new Object[]{p.getIdpedido(), p.getLivro(), p.getDatacompra});
-//            }
-//
-//        } catch (Exception ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao carregar database: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
+    public void LoadPedidos(long idCliente) {
+        try {
+            CompraDAOImp dao = new CompraDAOImp();
+            List<Compra> compras = dao.listarPorCliente(idCliente);
+            
+            DefaultTableModel DFT = (DefaultTableModel) tabelaPedidos.getModel();
+            DFT.setRowCount(0);
+
+            for (Compra c : compras) {
+                DFT.addRow(new Object[]{c.getCod_pedido(), c.getTituloLivro(), c.getData_compra()});
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar database: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ClienteRegistro tela = new ClienteRegistro(this);
+        ClienteRegistro tela = new ClienteRegistro();
         tela.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -366,7 +374,8 @@ public class ClienteView extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String id = fieldIDCliente.getText();
 
-        if (id == null) {
+        if (id.isEmpty()) {
+            LoadClientes();
             return;
         }
 
@@ -401,7 +410,7 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void tabelaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaClientesMouseClicked
-        // TODO add your handling code here:
+
         try {
             int row = tabelaClientes.getSelectedRow();
 
@@ -410,12 +419,15 @@ public class ClienteView extends javax.swing.JFrame {
                 return;
             }
 
+            Long idCliente = Long.parseLong(tabelaClientes.getModel().getValueAt(row, 0).toString());
+            labelId.setText(idCliente.toString());
             labelNome.setText(tabelaClientes.getModel().getValueAt(row, 1).toString());
-            labelId.setText(tabelaClientes.getModel().getValueAt(row, 0).toString());
             labelEndereço.setText(tabelaClientes.getModel().getValueAt(row, 4).toString());
             labelTelefone.setText(tabelaClientes.getModel().getValueAt(row, 5).toString());
             labelCad.setText(tabelaClientes.getModel().getValueAt(row, 3).toString());
-
+            
+            LoadPedidos(idCliente);
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao puxar cliente da database: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }

@@ -1,26 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
 import dao.ClienteDAOImp;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 
-/**
- *
- * @author luyze.marques
- */
 public class ClienteRegistro extends javax.swing.JFrame {
     
-    private ClienteView clienteView = new ClienteView();
-
     private boolean editMode = false;
     private Cliente clienteEditando = null;
 
     // padrão: cadastrar
-    public ClienteRegistro(ClienteView clienteView) {
+    public ClienteRegistro() {
         initComponents();
         editMode = false;
     }
@@ -35,12 +25,15 @@ public class ClienteRegistro extends javax.swing.JFrame {
         fieldEndereco.setText(cliente.getEndereco());
         fieldTelefone.setText(cliente.getTelefone());
 
-        if (cliente.getTipo_cliente().equalsIgnoreCase("PF")) {
+        if ("PF".equals(cliente.getTipo_cliente().toString())) {
             comboTipo.setSelectedItem("CPF");
             aplicarMascara("###.###.###-##");
-        } else {
+        } else if ("PJ".equals(cliente.getTipo_cliente().toString())) {
             comboTipo.setSelectedItem("CNPJ");
             aplicarMascara("##.###.###/####-##");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar CPF/CNPJ." + cliente.getTipo_cliente());
+            return;
         }
 
         fieldCad.setText(cliente.getCpf_cnpj());
@@ -75,6 +68,7 @@ public class ClienteRegistro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Registrar Cliente");
 
         jLabel2.setText("Nome:");
@@ -200,7 +194,7 @@ public class ClienteRegistro extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,9 +210,7 @@ public class ClienteRegistro extends javax.swing.JFrame {
             javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter(mascara);
             mask.setPlaceholderCharacter('_');
             fieldCad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mask));
-            fieldCad.setValue(null);
             fieldCad.setEnabled(true);
-
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -228,10 +220,12 @@ public class ClienteRegistro extends javax.swing.JFrame {
         String tipoSel = (String) comboTipo.getSelectedItem();
         if ("CPF".equals(tipoSel)) {
             aplicarMascara("###.###.###-##");
+             fieldCad.setEnabled(true);
         } else if ("CNPJ".equals(tipoSel)) {
             aplicarMascara("##.###.###/####-##");
+            fieldCad.setEnabled(true);
         } else {
-            fieldCad.setValue(null);
+            fieldCad.setText("");
             fieldCad.setEnabled(false);
             fieldCad.setFormatterFactory(null);
         }
@@ -246,6 +240,15 @@ public class ClienteRegistro extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         try {
+            
+            //validacao
+            if ((fieldNome.getText().isEmpty()) || (fieldEndereco.getText().isEmpty())
+             || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty())
+             || (comboTipo.getSelectedIndex() == 0) || (comboTipo.getSelectedItem() == null)) {
+                JOptionPane.showMessageDialog(null, "os campos não podem ser vazios");
+                return;
+            }
+
             Cliente cliente = new Cliente();
             cliente.setNome(fieldNome.getText());
             cliente.setEndereco(fieldEndereco.getText());
@@ -261,27 +264,15 @@ public class ClienteRegistro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Selecione um tipo válido (CPF ou CNPJ)");
                 return;
             }
-
-            //validacao
-            if ((fieldNome.getText().isEmpty()) || (fieldEndereco.getText().isEmpty())
-                    || (fieldTelefone.getText().isEmpty()) || (fieldCad.getText().isEmpty())
-                    || (comboTipo.getSelectedIndex() == 0)) {
-                JOptionPane.showMessageDialog(null, "os campos não podem ser vazios");
-                return;
-            }
             
-            //instanciando a classe usrdao do package e criando seu obj
             ClienteDAOImp dao = new ClienteDAOImp();
-            
             if (editMode) {
                 cliente.setIdcliente(clienteEditando.getIdcliente());
                 dao.atualizar(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
-                clienteView.LoadClientes();
             } else {
                 dao.inserir(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
-                clienteView.LoadClientes();
             }
 
             this.dispose();

@@ -11,15 +11,15 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ClienteDAOImp implements ClienteDAO {
-    
+
     private Connection conn;
-    
+
     public ClienteDAOImp() {
         this.conn = new ConnectionFactory().getConnection();
     }
-    
+
     @Override
-    public void inserir(Cliente cliente) throws SQLException {
+    public void inserir(Cliente cliente) {
         String sql = "INSERT INTO cliente(nome,endereco,telefone,cpf_cnpj,tipo_cliente) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -30,11 +30,13 @@ public class ClienteDAOImp implements ClienteDAO {
             ps.setString(5, cliente.getTipo_cliente());
 
             ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao inserir cliente: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     @Override
-    public void atualizar(Cliente cliente) throws SQLException {
+    public void atualizar(Cliente cliente) {
         String sql = "UPDATE cliente SET nome=?,endereco=?,telefone=?,cpf_cnpj=?,tipo_cliente=? WHERE id_cliente=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -46,42 +48,44 @@ public class ClienteDAOImp implements ClienteDAO {
             ps.setLong(6, cliente.getIdcliente());
 
             ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar cliente: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     @Override
-    public void remover(Cliente cliente) throws SQLException {
-        String sql = "DELETE from cliente WHERE id_cliente=?";
+    public void remover(Cliente cliente) {
+        String sql = "UPDATE from cliente SET ativo = 'N' WHERE id_cliente=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, cliente.getIdcliente());
 
             ps.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao remover cliente: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     @Override
     public Cliente buscaId(long id) {
-        String sql = "SELECT * FROM cliente WHERE id_cliente=?";
+        String sql = "SELECT * FROM cliente WHERE id_cliente=? AND ativo='S'";
         Cliente cliente = new Cliente();
 
-        try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-                                
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setLong(1, id);
 
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {              
-                cliente.setIdcliente(rs.getLong("id_cliente"));
-                cliente.setNome(rs.getString("nome"));
-                cliente.setEndereco(rs.getString("endereco"));
-                cliente.setTelefone(rs.getString("telefone"));
-                cliente.setCpf_cnpj(rs.getString("cpf_cnpj"));
-                cliente.setTipo_cliente(rs.getString("endereco"));
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Usuário com o ID informado não existe \n", "Erro", JOptionPane.ERROR_MESSAGE);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    cliente.setIdcliente(rs.getLong("id_cliente"));
+                    cliente.setNome(rs.getString("nome"));
+                    cliente.setEndereco(rs.getString("endereco"));
+                    cliente.setTelefone(rs.getString("telefone"));
+                    cliente.setCpf_cnpj(rs.getString("cpf_cnpj"));
+                    cliente.setTipo_cliente(rs.getString("tipo_cliente"));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário com o ID informado não existe \n", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar usuário: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -89,15 +93,13 @@ public class ClienteDAOImp implements ClienteDAO {
 
         return cliente;
     }
-    
+
     @Override
     public List<Cliente> listar() {
-        String sql = "SELECT * FROM cliente";
-        List<Cliente> clientes = new ArrayList<Cliente>();
+        String sql = "SELECT * FROM cliente WHERE ativo='S'";
+        List<Cliente> clientes = new ArrayList<>();
 
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
+        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 Cliente cliente = new Cliente();
@@ -114,7 +116,7 @@ public class ClienteDAOImp implements ClienteDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar usuário: \n" + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         return clientes;
     }
 }
