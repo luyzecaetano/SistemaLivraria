@@ -278,12 +278,6 @@ public class LivroRegistro extends javax.swing.JFrame {
         fieldQtde.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnRegistrar;

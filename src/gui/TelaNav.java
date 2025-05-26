@@ -117,7 +117,8 @@ public class TelaNav extends javax.swing.JFrame {
     }//GEN-LAST:event_verLivrosActionPerformed
 
     private void verEditorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEditorasActionPerformed
-        
+        EditoraView editoraView = new EditoraView();
+        editoraView.setVisible(true);
     }//GEN-LAST:event_verEditorasActionPerformed
 
     private void verPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verPedidosActionPerformed

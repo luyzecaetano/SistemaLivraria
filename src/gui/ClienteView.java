@@ -435,13 +435,6 @@ public class ClienteView extends javax.swing.JFrame {
 //        inserir lógica para puxar tabela de pedidos
     }//GEN-LAST:event_tabelaClientesMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnBuscar;
