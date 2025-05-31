@@ -85,7 +85,8 @@ public class CompraDAOImp implements CompraDAO {
         String sql = "SELECT c.*, cli.nome AS nome_cliente, l.titulo AS titulo_livro FROM compra c "
                 + "JOIN cliente cli ON c.id_cliente = cli.id_cliente "
                 + "JOIN livro l ON c.id_livro = l.id_livro "
-                + "WHERE cod_pedido=? AND cli.ativo='S' AND l.ativo='S'";
+                + "WHERE cod_pedido=? AND cli.ativo='S' AND l.ativo='S'"
+                + "ORDER BY cod_pedido";
         List<Compra> compras = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(sql);) {
@@ -123,7 +124,8 @@ public class CompraDAOImp implements CompraDAO {
         String sql = "SELECT c.*, cli.nome AS nome_cliente, l.titulo AS titulo_livro FROM compra c "
                 + "JOIN cliente cli ON c.id_cliente = cli.id_cliente "
                 + "JOIN livro l ON c.id_livro = l.id_livro "
-                + "WHERE cli.ativo='S' AND l.ativo='S'";
+                + "WHERE cli.ativo='S' AND l.ativo='S'"
+                + "ORDER BY cod_pedido";
 
         List<Compra> compras = new ArrayList<>();
 

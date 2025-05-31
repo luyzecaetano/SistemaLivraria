@@ -67,6 +67,7 @@ public class CompraRegistro extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wish-list.png"))); // NOI18N
         jLabel1.setText("Registrar Pedido:");
 
         jLabel2.setText("Selecione o cliente:");
@@ -80,6 +81,7 @@ public class CompraRegistro extends javax.swing.JFrame {
         }
         fieldData.setToolTipText("");
 
+        btnAddLinha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/book.png"))); // NOI18N
         btnAddLinha.setText("Adicionar mais livros");
         btnAddLinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +89,7 @@ public class CompraRegistro extends javax.swing.JFrame {
             }
         });
 
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/writing.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
