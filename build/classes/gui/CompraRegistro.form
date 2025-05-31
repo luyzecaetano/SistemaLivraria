@@ -118,6 +118,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/wish-list.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Registrar Pedido:"/>
           </Properties>
         </Component>
@@ -151,6 +154,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnAddLinha">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/book.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Adicionar mais livros"/>
           </Properties>
           <Events>
@@ -159,6 +165,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnRegistrar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/writing.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Registrar"/>
           </Properties>
           <Events>

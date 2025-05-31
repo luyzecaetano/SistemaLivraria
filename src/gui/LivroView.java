@@ -68,10 +68,12 @@ public class LivroView extends javax.swing.JFrame {
         }
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Livros Cadastrados");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/book.png"))); // NOI18N
+        jLabel1.setText(" Livros  Cadastrados");
 
         jLabel9.setText("Buscar por ID:");
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscar.setText("buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +81,7 @@ public class LivroView extends javax.swing.JFrame {
             }
         });
 
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user.png"))); // NOI18N
         btnCadastrar.setText("cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +89,7 @@ public class LivroView extends javax.swing.JFrame {
             }
         });
 
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sync.png"))); // NOI18N
         btnAtualizar.setText("atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +97,7 @@ public class LivroView extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnExcluir.setText("excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +117,6 @@ public class LivroView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
@@ -126,7 +130,8 @@ public class LivroView extends javax.swing.JFrame {
                                 .addComponent(btnAtualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnExcluir)
-                                .addGap(15, 15, 15)))))
+                                .addGap(15, 15, 15))
+                            .addComponent(jLabel1))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

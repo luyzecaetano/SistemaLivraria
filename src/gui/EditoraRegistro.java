@@ -59,6 +59,7 @@ public class EditoraRegistro extends javax.swing.JFrame {
 
         jLabel3.setText("Endereço:");
 
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/writing.png"))); // NOI18N
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +67,7 @@ public class EditoraRegistro extends javax.swing.JFrame {
             }
         });
 
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eraser.png"))); // NOI18N
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,6 +78,7 @@ public class EditoraRegistro extends javax.swing.JFrame {
         fieldNome.setMinimumSize(new java.awt.Dimension(286, 25));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bookstore.png"))); // NOI18N
         jLabel1.setText("Registrar Editora");
 
         jLabel9.setText("Telefone:");

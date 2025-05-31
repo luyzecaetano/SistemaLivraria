@@ -55,7 +55,7 @@ public class ClienteDAOImp implements ClienteDAO {
 
     @Override
     public void remover(Cliente cliente) {
-        String sql = "UPDATE from cliente SET ativo = 'N' WHERE id_cliente=?";
+        String sql = "UPDATE cliente SET ativo = 'N' WHERE id_cliente=?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, cliente.getIdcliente());

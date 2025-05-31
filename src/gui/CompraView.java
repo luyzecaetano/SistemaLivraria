@@ -42,10 +42,12 @@ public class CompraView extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/wish-list.png"))); // NOI18N
         jLabel1.setText("Pedidos");
 
         jLabel9.setText("Buscar por código:");
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/search.png"))); // NOI18N
         btnBuscar.setText("buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,6 +55,7 @@ public class CompraView extends javax.swing.JFrame {
             }
         });
 
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/writing.png"))); // NOI18N
         btnCadastrar.setText("cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +63,7 @@ public class CompraView extends javax.swing.JFrame {
             }
         });
 
+        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sync.png"))); // NOI18N
         btnAtualizar.setText("atualizar");
         btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +71,7 @@ public class CompraView extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnExcluir.setText("excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

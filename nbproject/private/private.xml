@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/triz/Documents/GitHub/SistemaLivraria/src/gui/TelaNav.java</file>
-            <file>file:/C:/Users/triz/Documents/GitHub/SistemaLivraria/src/gui/EditoraRegistro.java</file>
-            <file>file:/C:/Users/triz/Documents/GitHub/SistemaLivraria/src/gui/EditoraView.java</file>
+            <file>file:/C:/Users/turma2023/Desktop/liv/src/dao/EditoraDAOImp.java</file>
+            <file>file:/C:/Users/turma2023/Desktop/liv/src/dao/CompraDAO.java</file>
+            <file>file:/C:/Users/turma2023/Desktop/liv/src/dao/ClienteDAOImp.java</file>
+            <file>file:/C:/Users/turma2023/Desktop/liv/src/dao/LivroDAOImp.java</file>
+            <file>file:/C:/Users/turma2023/Desktop/liv/src/gui/ClienteView.java</file>
         </group>
     </open-files>
 </project-private>
